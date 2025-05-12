@@ -4,10 +4,11 @@
 #include <unordered_map>
 #include <string>
 #include <limits> // Required for numeric_limits
-
+#include"User.h"
 using namespace std; // Included as requested
 
 // Definition of the Property struct's display function
+
 void Property::display() {
     cout << "ID: " << id << "\nLocation: " << location << "\nPrice: " << price
          << "\nDescription: " << description << "\nBedrooms: " << bedrooms
@@ -17,8 +18,9 @@ void Property::display() {
 
 // Definitions of the PropertyManagement class member functions
 
-void PropertyManagement::addProperty(unordered_map<int, Property>& properties) {
+void PropertyManagement::addProperty(int userId,unordered_map<int, Property>& properties) {
     Property p;
+    p.userId=userId;
     cout << "Enter Property ID: ";
     cin >> p.id;
     // Check if ID already exists
@@ -41,7 +43,10 @@ void PropertyManagement::addProperty(unordered_map<int, Property>& properties) {
 
     cout << "Enter Description: ";
     getline(cin, p.description);
-
+    cout<<" Enter the type : ";
+    getline(cin,p.type);
+    cout<<"Enter the area of the property : ";
+    cin>>p.area;
     cout << "Enter Number of Bedrooms: ";
     cin >> p.bedrooms;
     // Clear the newline character left by cin >> p.bedrooms;
@@ -53,7 +58,7 @@ void PropertyManagement::addProperty(unordered_map<int, Property>& properties) {
     p.approved = false;
 
     properties[p.id] = p;
-    cout << "Property added successfully. Waiting for admin approval.\n"; // Added message about approval
+    cout << "Property added successfully. Waiting for admin approval.\n";
 }
 
 void PropertyManagement::removeProperty(unordered_map<int, Property>& properties) {
@@ -68,6 +73,29 @@ void PropertyManagement::removeProperty(unordered_map<int, Property>& properties
     } else {
         cout << "Property not found.\n";
     }
+}
+
+void PropertyManagement::removeUserProperty(int userId,unordered_map<int, Property>& properties){
+    vector<Property>prop;
+    for(auto& pair : properties){
+        if(pair.second.userId==userId){
+            prop.push_back(pair.second);
+        }
+    }
+    for(Property p : prop){
+        p.display();
+        cout<<"---------------------\n";
+    }
+    int id;
+    cout<<"Enter the id of the property : ";
+    cin>>id;
+    for(Property p : prop){
+        if(id==p.id && properties.erase(id)){
+             cout << "Property removed successfully.\n";
+             return;
+        }
+    }
+    cout<<"Invalid property id\n";
 }
 
 void PropertyManagement::editProperty(unordered_map<int, Property>& properties) {
@@ -127,7 +155,7 @@ void PropertyManagement::displayAllProperties(unordered_map<int, Property>& prop
     }
 }
 
-void PropertyManagement::manageProperties(unordered_map<int, Property>& properties) {
+void PropertyManagement::manageProperties(int userId,unordered_map<int, Property>& properties) {
     int choice;
     while (true) {
         cout << "\n--- Manage Properties Menu ---\n";
@@ -146,7 +174,7 @@ void PropertyManagement::manageProperties(unordered_map<int, Property>& properti
         }
 
         switch (choice) {
-            case 1: addProperty(properties); break;
+            case 1: addProperty(userId,properties); break;
             case 2: removeProperty(properties); break;
             case 3: editProperty(properties); break;
             case 4: highlightProperty(properties); break;

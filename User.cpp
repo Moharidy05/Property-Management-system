@@ -5,7 +5,9 @@
 #include <vector>
 #include <fstream>
 #include <limits> // Required for numeric_limits
-
+#include<unordered_map>
+#include"Property.h"
+#include"Admin.h"
 using namespace std; // Included as requested
 
 // Constructor definition
@@ -57,6 +59,15 @@ void User::changePassword() {
     }
     cout << "-----------------------------------" << endl;
 }
+
+/* void User::displayProperties(unordered_map<int,Property>&properties){
+    for(auto& pair : properties){
+        if(pair.second.userId==this->userId){
+            pair.second.display();
+            cout<<"----------------------------------\n";
+        }
+    }
+} */
 
 // If you implement load/save for User, define them here:
 /*

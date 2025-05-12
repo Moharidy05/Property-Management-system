@@ -1,7 +1,7 @@
 #include "Admin.h"
 #include "Property.h" // Include Property header for PropertyManagement
 #include "RealEstatePortal.h" // Include RealEstatePortal header for creating an instance
-
+#include"User.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -296,7 +296,7 @@ void Admin::handleActions(vector<User>& users, unordered_map<int, Property>& pro
                 approveListing(properties); // Pass the properties map
                 break;
             case 4:
-                propertyManager.manageProperties(properties); // Use the propertyManager instance
+                propertyManager.manageProperties(this->userId,properties); // Use the propertyManager instance
                 break;
             case 5:
                 manageProfile(); // Manage the current Admin's profile
