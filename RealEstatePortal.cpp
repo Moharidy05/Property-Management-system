@@ -195,6 +195,7 @@ void RealEstatePortal::saveData() {
 
 
 bool RealEstatePortal::registerUser() {
+    system("cls"); // Clear the console (Windows specific)
     string username, password, email, phone;
     cout << "Enter username: ";
     getline(cin, username);
@@ -347,6 +348,7 @@ void RealEstatePortal:: searchProperties(){
     
 }
 void RealEstatePortal::manageUserProfile(User* loggedInUser) {
+    system("cls"); // Clear the console (Windows specific)
     int choice;
     while (true) {
         cout << "\n=== User Dashboard ===\n";
@@ -418,8 +420,9 @@ void RealEstatePortal::run()
     int choice;
 
     while (true) {
+        system("cls"); // Clear the console (Windows specific)
         cout << "\n=== Real Estate Portal ===\n";
-        cout << "Login as : \n 1.Admin \n 2.User\n";
+        cout << "You are : \n 1.Admin \n 2.User\n";
         cin>>choice;
         if(choice==1)
         {

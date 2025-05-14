@@ -37,6 +37,7 @@ Admin* Admin::login(vector<Admin>& admins) {
 }
 
 void Admin::showDashboard() {
+   
     cout << "\n----- Admin Dashboard -----\n";
     cout << "1. Show all users\n";
     cout << "2. Manage users\n";
@@ -47,6 +48,7 @@ void Admin::showDashboard() {
 }
 
 void Admin::listUsers(const vector<User>& users) {
+    system("cls"); // Clear the console (Windows specific)
     cout << "\n--- All Users ---\n";
     if (users.empty()) {
         cout << "No users registered.\n";
@@ -58,9 +60,11 @@ void Admin::listUsers(const vector<User>& users) {
              << ", Email: " << user.email
              << ", Active: " << (user.active ? "Yes" : "No") << '\n';
     }
+ 
 }
 
 void Admin::approveListing(unordered_map<int, Property>& properties) {
+    system("cls"); // Clear the console (Windows specific)
     cout << "-------- List of Unapproved Properties --------\n";
     bool foundUnapproved = false;
     for (const auto& entry : properties) {
@@ -110,12 +114,14 @@ void Admin::approveListing(unordered_map<int, Property>& properties) {
     }
      // Clear the rest of the line after reading the ID
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+     
 }
 
 void Admin::addUser(vector<User>& users) {
     // Create a temporary RealEstatePortal instance to use its registerUser function
     // Note: This creates a new portal instance each time. If users need to be persistent
     // across admin sessions, you would need to pass the main users vector to this function.
+    system("cls"); // Clear the console (Windows specific)
     string uname, pwd, email, phone;
     int id;
     cout << "Enter user ID: ";
@@ -141,6 +147,16 @@ void Admin::addUser(vector<User>& users) {
 }
 
 void Admin::removeUser(vector<User>& users) {
+    system("cls"); // Clear the console (Windows specific)
+    cout << "\n--- Remove User ---\n";
+    if (users.empty()) {
+        cout << "No users registered.\n";
+        return;
+    }
+    cout << "Registered users:\n";
+    for (const User& user : users) {
+        cout << "User ID: " << user.userId << ", Username: " << user.username << "\n";
+    }
     int id;
     cout << "Enter user id you want to remove : \n";
     cin >> id;
@@ -158,6 +174,8 @@ void Admin::removeUser(vector<User>& users) {
 }
 
 void Admin::disableUser(vector<User>& users) {
+    system("cls"); // Clear the console (Windows specific)
+    cout << "\n--- Disable User ---\n";
     int userId;
     cout << "Enter user id you want to deactivate : \n";
     cin >> userId;
@@ -175,6 +193,7 @@ void Admin::disableUser(vector<User>& users) {
 }
 
 void Admin::manageProfile() {
+    system("cls"); // Clear the console (Windows specific)
     int choice;
     while (true) {
         cout << "\n--- Manage Admin Profile ---\n";
@@ -218,6 +237,7 @@ void Admin::manageProfile() {
 }
 
 void Admin::manageUser(vector<User>& users) {
+    system("cls"); // Clear the console (Windows specific)
     int choice;
     while (true) {
         cout << "\n--- Manage Users Menu ---\n";
@@ -262,9 +282,11 @@ void Admin::manageUser(vector<User>& users) {
 
 
 void Admin::handleActions(vector<User>& users, unordered_map<int, Property>& properties, const vector<Admin>& admins) {
+    
+    system("cls"); // Clear the console (Windows specific)
     int choice;
     PropertyManagement propertyManager; // Create an instance of PropertyManagement
-
+    
     while (true) {
         showDashboard();
         cout << "\nEnter your choice: ";
